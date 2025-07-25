@@ -10,16 +10,54 @@
     background: linear-gradient(135deg, #1e1a38, #3b1f5f);
     font-family: 'Orbitron', sans-serif;
     color: #cfcfff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
   }
+
   h1 {
-    text-align: center;
+    margin-bottom: 40px;
     text-shadow: 0 0 10px #6c63ff;
   }
-  /* Buraya giriş sonrası ekran tasarımını eklersin */
+
+  button {
+    width: 200px;
+    padding: 15px;
+    margin: 10px 0;
+    font-size: 1.2rem;
+    background: linear-gradient(90deg, #6c63ff, #4439d3);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 15px #6c63ff;
+    transition: background 0.3s ease;
+  }
+
+  button:hover {
+    background: linear-gradient(90deg, #807aff, #5c50db);
+  }
 </style>
 </head>
 <body>
-  <h1>Hoşgeldin ZATECH AI</h1>
-  <p>Buraya şifre girildikten sonraki ana ekran gelecektir.</p>
+
+  <h1>ZATECH AI Ana Sayfa</h1>
+
+  <button id="btn-start-chat">Sohbete Başla</button>
+  <button id="btn-other-action" style="display:none;">İkinci Buton (Onay Bekliyor)</button>
+
+  <script>
+    // İlk buton tıklama örneği
+    document.getElementById('btn-start-chat').addEventListener('click', () => {
+      alert('Sohbete Başla butonuna basıldı! Gmail\'e bildirim gönderilecek.');
+      // Buraya API çağrısı, bildirim gönderme kodu eklenebilir
+    });
+
+    // İkinci buton başlangıçta görünmez, onaydan sonra görünür olacak
+    // Örneğin: localStorage veya backend onay bilgisine göre gösterilebilir
+  </script>
+
 </body>
 </html>
