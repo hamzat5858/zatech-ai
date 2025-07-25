@@ -1,68 +1,32 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ZATECH AI Giriş</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: Arial, sans-serif;
-      color: white;
-    }
-    .login-box {
-      background: rgba(0, 0, 0, 0.7);
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
-      text-align: center;
-    }
-    input {
-      padding: 10px;
-      width: 200px;
-      border-radius: 10px;
-      border: none;
-      margin-bottom: 15px;
-      font-size: 16px;
-    }
-    button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 10px;
-      background-color: #6c63ff;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #4e47cc;
-    }
-  </style>
-</head>
-<body>
-  <div class="login-box">
-    <h2>Giriş Yap</h2>
-    <input type="password" id="password" placeholder="Şifre">
-    <br>
-    <button onclick="login()">Giriş Yap</button>
-    <p id="error" style="color: red; margin-top: 10px;"></p>
-  </div>
+<!-- index.html içinde şifre girişi formunun olduğu yere ekle -->
 
-  <script>
-    function login() {
-      const pw = document.getElementById('password').value;
-      if (pw === '1158') {
-        window.location.href = 'chat.html'; // sohbet ekranına yönlendir
-      } else {
-        document.getElementById('error').innerText = "Şifre hatalı!";
-      }
+<input type="password" id="password-input" placeholder="Şifreyi girin" />
+<button id="login-btn">Giriş Yap</button>
+
+<script>
+  document.getElementById('login-btn').addEventListener('click', async () => {
+    const password = document.getElementById('password-input').value;
+    if(password !== '1158') {
+      alert('Şifre yanlış!');
+      return;
     }
-  </script>
-</body>
-</html>
+
+    // IP adresini al
+    const ip = await fetch('https://api.ipify.org?format=json')
+      .then(res => res.json())
+      .then(data => data.ip);
+
+    // Cihaz bilgisi (User Agent)
+    const device = navigator.userAgent;
+
+    // Backend'e gönder
+    fetch('https://YOUR_BACKEND_URL/api/register', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ip, device})
+    });
+
+    // Başarılı giriş sonrası yönlendirme
+    window.location.href = '/main.html'; // giriş sonrası ana sayfa
+  });
+</script>
