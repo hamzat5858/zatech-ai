@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZATECH AI</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      font-family: Arial, sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    header {
+      background: rgba(0,0,0,0.7);
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-shadow: 0 0 5px #6c63ff;
+    }
+    #chat-box {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      backdrop-filter: blur(10px);
+    }
+    .message {
+      margin: 10px 0;
+      padding: 10px 15px;
+      border-radius: 10px;
+      max-width: 70%;
+    }
+    .user {
+      background-color: rgba(108, 99, 255, 0.8);
+      align-self: flex-end;
+    }
+    .bot {
+      background-color: rgba(0, 0, 0, 0.6);
+      align-self: flex-start;
+    }
+    #input-area {
+      display: flex;
+      padding: 10px;
+      background-color: #111;
+      border-top: 1px solid #333;
+    }
+    #input-area input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+    #input-area button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background-color: #6c63ff;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      padding: 5px;
+      font-size: 12px;
+      background-color: #000;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <header>ZATECH AI</header>
+
+  <div id="chat-box"></div>
+
+  <div id="input-area">
+    <input type="text" id="user-input" placeholder="Bir şeyler yaz..." onkeydown="if(event.key==='Enter') sendMessage()">
+    <button onclick="sendMessage()">Gönder</button>
+  </div>
+
+  <footer>hamza © 2025</footer>
+
+  <script>
+    const chatBox = document.getElementById('chat-box');
+
+    function appendMessage(text, sender) {
+      const msg = document.createElement('div');
+      msg.className = 'message ' + sender;
+      msg.innerText = text;
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('user-input');
+      const text = input.value.trim();
+      if (text === '') return;
+
+      appendMessage(text, 'user');
+      input.value = '';
+
+      setTimeout(() => {
+        appendMessage(generateBotReply(text), 'bot');
+      }, 600);
+    }
+
+    function generateBotReply(text) {
+      const lower = text.toLowerCase();
+      if (lower.includes('selam') || lower.includes('merhaba')) {
+        return 'Selam Hamza! Yine bomba gibisin 😎';
+      }
+      if (lower.includes('nasılsın')) {
+        return 'Ben harikayım, seninle çalışmak güzel! 🚀';
+      }
+      if (lower.includes('proje')) {
+        return 'Proje mi? Hemen başlayalım kaptan! 🔧';
+      }
+      if (lower.includes('teşekkür')) {
+        return 'Rica ederim, her zaman buradayım 🙌';
+      }
+      return 'Hadi yeni bir fikir üretelim! 🧠💡';
+    }
+  </script>
+</body>
+</html>
