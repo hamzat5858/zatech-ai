@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ZATECH AI</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       background: linear-gradient(135deg, #1f1c2c, #928dab);
       font-family: Arial, sans-serif;
       color: white;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
+      display: flex; flex-direction: column; height: 100vh;
     }
     header {
       background: rgba(0,0,0,0.7);
@@ -82,7 +79,7 @@
   <div id="chat-box"></div>
 
   <div id="input-area">
-    <input type="text" id="user-input" placeholder="Bir şeyler yaz..." onkeydown="if(event.key==='Enter') sendMessage()">
+    <input type="text" id="user-input" placeholder="Bir şeyler yaz..." onkeydown="if(event.key==='Enter') sendMessage()"/>
     <button onclick="sendMessage()">Gönder</button>
   </div>
 
