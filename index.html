@@ -1,32 +1,125 @@
-<!-- index.html içinde şifre girişi formunun olduğu yere ekle -->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ZATECH AI Giriş</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
-<input type="password" id="password-input" placeholder="Şifreyi girin" />
-<button id="login-btn">Giriş Yap</button>
+  body {
+    margin: 0; padding: 0;
+    background: linear-gradient(135deg, #1e1a38, #3b1f5f);
+    font-family: 'Orbitron', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #cfcfff;
+    overflow: hidden;
+  }
 
-<script>
-  document.getElementById('login-btn').addEventListener('click', async () => {
-    const password = document.getElementById('password-input').value;
-    if(password !== '1158') {
-      alert('Şifre yanlış!');
-      return;
+  .container {
+    background: rgba(30, 25, 55, 0.85);
+    padding: 40px 50px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #6c63ff;
+    text-align: center;
+    width: 320px;
+  }
+
+  h1 {
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    text-shadow: 0 0 10px #8a79ff;
+  }
+
+  input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 10px;
+    background: #2a2448;
+    color: #cfcfff;
+    box-shadow: inset 0 0 8px #5e52d3;
+    outline: none;
+    text-align: center;
+    letter-spacing: 0.2rem;
+    transition: box-shadow 0.3s ease;
+  }
+
+  input[type="password"]:focus {
+    box-shadow: 0 0 15px #7d70ff;
+  }
+
+  button {
+    margin-top: 25px;
+    width: 100%;
+    padding: 15px;
+    font-size: 1.3rem;
+    background: linear-gradient(90deg, #6c63ff, #4439d3);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    cursor: pointer;
+    text-shadow: 0 0 8px #c3bfff;
+    transition: background 0.3s ease;
+    box-shadow: 0 0 15px #6c63ff;
+  }
+
+  button:hover {
+    background: linear-gradient(90deg, #807aff, #5c50db);
+  }
+
+  /* Led-like glow animation on container */
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 20px #6c63ff, inset 0 0 15px #7f7aff;
     }
+    50% {
+      box-shadow: 0 0 30px #a393ff, inset 0 0 20px #9ea3ff;
+    }
+  }
 
-    // IP adresini al
-    const ip = await fetch('https://api.ipify.org?format=json')
-      .then(res => res.json())
-      .then(data => data.ip);
+  .container {
+    animation: glow 3s ease-in-out infinite;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>ZATECH AI</h1>
+    <input type="password" id="password-input" placeholder="Şifreyi girin" autofocus />
+    <button id="login-btn">Giriş Yap</button>
+  </div>
 
-    // Cihaz bilgisi (User Agent)
-    const device = navigator.userAgent;
+  <script>
+    document.getElementById('login-btn').addEventListener('click', async () => {
+      const password = document.getElementById('password-input').value;
+      if(password !== '1158') {
+        alert('Şifre yanlış!');
+        return;
+      }
 
-    // Backend'e gönder
-    fetch('https://YOUR_BACKEND_URL/api/register', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ip, device})
+      // IP adresini al
+      const ip = await fetch('https://api.ipify.org?format=json')
+        .then(res => res.json())
+        .then(data => data.ip);
+
+      // Cihaz bilgisi (User Agent)
+      const device = navigator.userAgent;
+
+      // Backend'e gönder
+      fetch('https://YOUR_BACKEND_URL/api/register', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ip, device})
+      });
+
+      // Başarılı giriş sonrası yönlendirme
+      window.location.href = '/main.html'; // giriş sonrası ana sayfa
     });
-
-    // Başarılı giriş sonrası yönlendirme
-    window.location.href = '/main.html'; // giriş sonrası ana sayfa
-  });
-</script>
+  </script>
+</body>
+</html>
